@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Create User Test</title>
+    <meta charset="UTF-8"/>
+</head>
+<style>
+    body {
+         font-family: Arial, sans-serif;
+     }
+     form {
+         max-width: 400px;
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     }
+     form label {
+         display: block;
+         font-weight: bold;
+         margin-bottom: 5px;
+     }
+     form p {
+         position: relative;
+         margin-bottom: 20px;
+     }
+     form span {
+         display: block;
+         padding: 8px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         box-sizing: border-box;
+         width: calc(100% - 18px);
+     }
+     form input {
+         position: absolute;
+         top: 0;
+         left: 0;
+         opacity: 0;
+         width: 100%;
+         height: 100%;
+         padding: 8px;
+         border: none;
+         border-radius: 4px;
+         box-sizing: border-box;
+     }
+     button {
+         display: block;
+         width: 100%;
+         padding: 10px;
+         background-color: #007bff;
+         color: #fff;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+     }
+
+    #success,#fail{
+         text-align:center
+    }
+</style>
+<body>
+<h1>Create User Test</h1>
+
+<h2>Let's test the user creation functionality.</h2>
+<h3>Create User with Valid Details</h3>
+
+
+<div concordion:execute="#userCreated = createUser(#userName, #email)">
+    <form>
+        <label for="userName">Username:</label>
+        <p>
+            <span id="userName" concordion:set="#userName">Manoj</span>
+            <input type="text" id="userNameInput" name="userName"/>
+        </p>
+
+        <label for="email">Email:</label>
+        <p>
+            <span id="email" concordion:set="#email">Manoj@breezeware.net</span>
+            <input type="email" id="emailInput" name="email"/>
+        </p>
+
+        <button type="submit">Create User</button>
+    </form>
+</div>
+
+
+<div id="success" concordion:assertEquals="#userCreated">
+    User Created
+</div>
+
+<h3>Create User with InValid Details</h3>
+
+<div concordion:execute="#userCreatedWithInvalidDetails = createUserWithInvalidDetails(#userName, #email)">
+    <form>
+        <label for="userName">Username:</label>
+        <p>
+            <span class="userName" concordion:set="#userName"></span>
+            <input type="text" class="userNameInput" name="userName"/>
+        </p>
+
+        <label for="email">Email:</label>
+        <p>
+            <span class="email" concordion:set="#email">Manoj@breezeware.net</span>
+            <input type="email" class="emailInput" name="email"/>
+        </p>
+
+        <button type="submit">Create User</button>
+    </form>
+</div>
+
+
+<div id="fail" concordion:assertEquals="#userCreatedWithInvalidDetails">
+    Invalid User Details
+</div>
+
+
+<!-- Output the value of #username-->
+<!--<div concordion:echo="#username"></div>-->
+
+
+
+
+
+
+</body>
+</html>

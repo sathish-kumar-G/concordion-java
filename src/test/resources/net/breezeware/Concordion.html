@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Sample Concordion Test</title>
+    <link href="/concordion.css" rel="stylesheet"></link>
+</head>
+<body>
+<h1>Sample Concordion Test</h1>
+
+<!-- Positive Test Case -->
+<p>Testing positive scenario:</p>
+<concordion:assertEquals expected="Hello from Spring Boot!" actual="${getResult()}">
+    Backend should respond with "Hello from Spring Boot!"
+</concordion:assertEquals>
+
+<!-- Negative Test Case -->
+<p>Testing negative scenario:</p>
+<concordion:assertNotEquals expected="Hello from Spring Boot!" actual="${getResult()}">
+    Backend should not respond with "Goodbye from Spring Boot!"
+</concordion:assertNotEquals>
+
+</body>
+</html>

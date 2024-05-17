@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Create User Test</title>
+    <meta charset="UTF-8"/>
+</head>
+<style>
+    body {
+         font-family: Arial, sans-serif;
+     }
+     form {
+         max-width: 400px;
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     }
+     form label {
+         display: block;
+         font-weight: bold;
+         margin-bottom: 5px;
+     }
+     form p {
+         position: relative;
+         margin-bottom: 20px;
+     }
+     form span {
+         display: block;
+         padding: 8px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         box-sizing: border-box;
+         width: calc(100% - 18px);
+     }
+     form input {
+         position: absolute;
+         top: 0;
+         left: 0;
+         opacity: 0;
+         width: 100%;
+         height: 100%;
+         padding: 8px;
+         border: none;
+         border-radius: 4px;
+         box-sizing: border-box;
+     }
+     button {
+         display: block;
+         width: 100%;
+         padding: 10px;
+         background-color: #007bff;
+         color: #fff;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+     }
+
+    #success,#fail{
+         text-align:center
+    }
+</style>
+<body>
+
+<h1>Let's test the Split User Full Name functionality.</h1>
+
+
+<div>
+<!--<div concordion:example="simple-names">-->
+
+    <h3>Examples</h3>
+
+    <table>
+        <tr>
+            <th>Full Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr concordion:execute="#result = split(#fullName)">
+            <td concordion:set="#fullName">John Smith</td>
+            <td concordion:assert-equals="#result.firstName">John</td>
+            <td concordion:assert-equals="#result.lastName">Smith</td>
+        </tr>
+        <tr concordion:execute="#result = split(#fullName)">
+            <td concordion:set="#fullName">David Peterson</td>
+            <td concordion:assert-equals="#result.firstName">David</td>
+            <td concordion:assert-equals="#result.lastName">Peterson</td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+
+
+<h1>Partial Matches</h1>
+
+<h4>
+    Username searches return partial matches, i.e. all usernames containing
+    the search string are returned.
+</h4>
+
+<!--<div concordion:example="beatles">-->
+<div>
+    <h3>Example</h3>
+
+    <p>Given these users:</p>
+
+    <table concordion:execute="setUpUser(#username)">
+        <tr><th concordion:set="#username">Username</th></tr>
+        <tr><td>john.lennon</td></tr>
+        <tr><td>ringo.starr</td></tr>
+        <tr><td>george.harrison</td></tr>
+        <tr><td>paul.mccartney</td></tr>
+    </table>
+
+    <p>Searching for "<b concordion:set="#searchString">arr</b>" will return:</p>
+
+    <table concordion:verify-rows="#username : getSearchResultsFor(#searchString)">
+        <tr><th concordion:assert-equals="#username">Matching Usernames</th></tr>
+        <tr><td>ringo.starr</td></tr>
+        <tr><td>george.harrison</td></tr>
+    </table>
+
+</div>
+
+<br></br>
+<br></br>
+<a concordion:run="concordion" href="User.html">User Page</a>
+
+</body>
+</html>

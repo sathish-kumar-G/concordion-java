@@ -1,0 +1,33 @@
+package net.breezeware;
+
+import org.concordion.api.ConcordionFixture;
+import org.concordion.api.FullOGNL;
+import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.extension.Extensions;
+import org.concordion.integration.junit4.ConcordionRunner;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.InputStream;
+
+@RunWith(ConcordionRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@FullOGNL
+public class ConcordionTest {
+
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public String getResult() {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/message", String.class);
+        return response.getBody();
+    }
+
+}

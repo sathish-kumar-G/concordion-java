@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Calculator Test</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<h1>Calculator Test</h1>
+
+<p>Let's test some basic arithmetic operations.</p>
+
+<p><span concordion:set="#input1">2</span> + <span concordion:set="#input2">3</span> = <span concordion:execute="#result = add(#input1, #input2)">5</span></p>
+
+<div  concordion:assertEquals="#result">
+    5
+</div>
+
+</body>
+</html>
